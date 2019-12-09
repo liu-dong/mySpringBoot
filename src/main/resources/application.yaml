@@ -1,0 +1,12 @@
+server:
+    address: 127.0.0.1
+    port: 8081
+    servlet:
+        #配置根路径
+        context-path: /
+
+spring:
+    mvc:
+        view:
+            prefix: /WEB-INF/view
+            suffix: .jsp
