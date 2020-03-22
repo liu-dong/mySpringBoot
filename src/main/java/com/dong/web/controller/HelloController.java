@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/hello")
 public class HelloController {
 
-    @RequestMapping(value = "hello")
+
+    @RequestMapping(value = "/hello")
     public String hello(){
         return "/hello";
     }
