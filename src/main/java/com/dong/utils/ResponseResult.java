@@ -10,6 +10,7 @@ import lombok.Data;
 public class ResponseResult {
 
     private int code = 200;
+    private boolean success = false;
     private String message;
     private Object data;
 

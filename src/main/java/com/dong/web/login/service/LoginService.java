@@ -1,8 +1,15 @@
 package com.dong.web.login.service;
 
-import com.dong.web.login.entity.User;
+import com.dong.utils.ResponseResult;
+import com.dong.web.login.model.LoginBean;
 
 public interface LoginService {
 
-    User getUserInfo(String username);
+    /**
+     * 登录方法
+     *
+     * @param bean
+     * @return
+     */
+    ResponseResult login(LoginBean bean);
 }

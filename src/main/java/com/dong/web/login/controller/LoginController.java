@@ -22,9 +22,6 @@ public class LoginController {
 
     @RequestMapping("/login")
     public ResponseResult login(LoginBean bean){
-        ResponseResult result = new ResponseResult();
-        User user = loginService.getUserInfo("admin");
-        System.out.println(user.getPassword());
-        return result;
+        return loginService.login(bean);
     }
 }
