@@ -1,7 +1,10 @@
 package com.dong.web.login.controller;
 
 import com.dong.utils.ResponseResult;
+import com.dong.web.login.entity.User;
 import com.dong.web.login.model.LoginBean;
+import com.dong.web.login.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,10 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
+    @Autowired
+    private LoginService loginService;
+
     @RequestMapping("/login")
     public ResponseResult login(LoginBean bean){
         ResponseResult result = new ResponseResult();
-
+        User user = loginService.getUserInfo("admin");
+        System.out.println(user.getPassword());
         return result;
     }
 }

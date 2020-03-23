@@ -83,7 +83,7 @@
         </dependency>
 
         <!-- SpringBoot不推荐使用JSP，所以需要加上下面两个jar包 -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
             <version>9.0.12</version>
@@ -91,7 +91,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>
