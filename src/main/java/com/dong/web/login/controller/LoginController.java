@@ -1,21 +1,22 @@
 package com.dong.web.login.controller;
 
 import com.dong.utils.ResponseResult;
-import com.dong.web.login.entity.User;
 import com.dong.web.login.model.LoginBean;
 import com.dong.web.login.service.LoginService;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -42,8 +43,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ResponseResult login(LoginBean bean, HttpServletRequest request) {
         // 从session中获取之前保存的验证码跟前台传来的验证码进行匹配
-        HttpSession session = request.getSession();
-        final Object kaptcha = session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        final Object kaptcha = request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         if (kaptcha == null) {
             return ResponseResult.error("验证码已失效");
         }
