@@ -11,6 +11,7 @@ public class LoginBean {
 
     private String username;
     private String password;
-    private String userToken;
+    private String userToken;//用户token
+    private String captcha;//验证码
 }
 
