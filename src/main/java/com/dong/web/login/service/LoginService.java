@@ -6,7 +6,7 @@ import com.dong.web.login.model.LoginBean;
 public interface LoginService {
 
     /**
-     * 登录方法
+     * 登录
      *
      * @param bean
      * @return

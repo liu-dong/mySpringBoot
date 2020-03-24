@@ -15,23 +15,25 @@ public class LoginServiceImpl implements LoginService {
     private UserJpaDao userJpaDao;
 
 
+    /**
+     * 登录
+     *
+     * @param bean
+     * @return
+     */
     @Override
     public ResponseResult login(LoginBean bean) {
-        ResponseResult result = new ResponseResult();
+        ResponseResult result;
         User user = userJpaDao.getUserByUsername(bean.getUsername());
         if (user != null) {
             if (bean.getPassword().equals(user.getPassword())){
-                result.setMessage("登录成功!");
-                bean.setUserToken("202003231731");
-                result.setData(bean);
+                bean.setUserToken(String.valueOf(System.currentTimeMillis()));
+                result = ResponseResult.success(bean,"登录成功!");
             }else {
-                result.setCode(500);
-                result.setSuccess(false);
-                result.setMessage("登录失败,密码错误!");
+                result = ResponseResult.error("登录失败,密码错误!");
             }
         }else {
-            result.setCode(500);
-            result.setMessage("登录失败,无该用户!");
+            result = ResponseResult.error("登录失败,无该用户!");
         }
         return result;
     }

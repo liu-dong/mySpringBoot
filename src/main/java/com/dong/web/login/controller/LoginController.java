@@ -5,10 +5,7 @@ import com.dong.web.login.entity.User;
 import com.dong.web.login.model.LoginBean;
 import com.dong.web.login.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 用户登录模块
@@ -22,8 +19,14 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public ResponseResult login(LoginBean bean){
+    /**
+     * 登录
+     *
+     * @param bean
+     * @return
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ResponseResult login(LoginBean bean) {
         return loginService.login(bean);
     }
 }
