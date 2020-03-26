@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @author LD
  */
 @RestController
-@RequestMapping("/systemMenu")
+@RequestMapping("/system/systemMenu")
 public class SystemMenuController {
 
     @Autowired
     private SystemMenuService systemMenuService;
 
+    /**
+     * 查询菜单信息列表
+     * @return
+     */
     @RequestMapping("/findSystemMenuList")
     public ResponseResult findSystemMenuList(){
         SystemMenuBean bean = new SystemMenuBean();
@@ -26,5 +30,38 @@ public class SystemMenuController {
         int limit = 1;
         int page = 1;
         return systemMenuService.findSystemMenuList(bean,limit,page);
+    }
+
+    /**
+     * 保存菜单信息
+     *
+     * @param bean
+     * @return
+     */
+    @RequestMapping("/saveSystemMenuInfo")
+    public ResponseResult saveSystemMenuInfo(SystemMenuBean bean){
+        return systemMenuService.saveSystemMenuInfo(bean);
+    }
+
+    /**
+     * 查询菜单详细页面
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/getSystemMenuView")
+    public ResponseResult getSystemMenuView(String id){
+        return systemMenuService.getSystemMenuView(id);
+    }
+
+    /**
+     * 删除菜单信息
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/deleteSystemMenuInfo")
+    public ResponseResult deleteSystemMenuInfo(String id){
+        return systemMenuService.deleteSystemMenuInfo(id);
     }
 }

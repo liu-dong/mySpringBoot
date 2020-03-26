@@ -34,18 +34,18 @@ public class SystemMenuServiceImpl implements SystemMenuService {
         StringBuilder sql = new StringBuilder();
         List<Object> param = new ArrayList<>();
         sql.append("select * from sys_menu where 1=1 ");
-        if (!StringUtils.isEmpty(bean.getHasChild())){
+        if (!StringUtils.isEmpty(bean.getHasChild())) {
             sql.append(" and has_child = ? ");
             param.add(bean.getHasChild());
         }
         Query query = entityManager.createNativeQuery(String.valueOf(sql));
         for (int i = 0; i < param.size(); i++) {
-            query.setParameter(i+1,param.get(i));
+            query.setParameter(i + 1, param.get(i));
         }
-        query.setFirstResult(limit-1);//起始数
+        query.setFirstResult(limit - 1);//起始数
         query.setMaxResults(page);
         query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-        List<Map<String,Object>> dataList = query.getResultList();
+        List<Map<String, Object>> dataList = query.getResultList();
         result.setData(dataList);
         return result;
     }
@@ -58,16 +58,16 @@ public class SystemMenuServiceImpl implements SystemMenuService {
         entity.setCreateTime(new Date());
         entity.setUpdateTime(new Date());
         entity = sysMenuJpaDao.save(entity);
-        return ResponseResult.success(entity,"保存成功!");
+        return ResponseResult.success(entity, "保存成功!");
     }
 
     @Override
     public ResponseResult getSystemMenuView(String id) {
         if (StringUtils.isEmpty(id)) {
             return ResponseResult.error("查询失败，id不能为空!");
-        }else{
+        } else {
             SysMenu entity = sysMenuJpaDao.getOne(id);
-            return ResponseResult.success(entity,"查询成功!");
+            return ResponseResult.success(entity, "查询成功!");
         }
     }
 
@@ -75,10 +75,10 @@ public class SystemMenuServiceImpl implements SystemMenuService {
     public ResponseResult deleteSystemMenuInfo(String id) {
         if (StringUtils.isEmpty(id)) {
             return ResponseResult.error("删除失败，id不能为空!");
-        }else{
+        } else {
             SysMenu entity = sysMenuJpaDao.getOne(id);
-                sysMenuJpaDao.delete(entity);
-            return ResponseResult.success(null,"删除成功!");
+            sysMenuJpaDao.delete(entity);
+            return ResponseResult.success(null, "删除成功!");
         }
     }
 }
