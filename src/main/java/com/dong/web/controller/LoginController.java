@@ -1,8 +1,8 @@
-package com.dong.web.login.controller;
+package com.dong.web.controller;
 
 import com.dong.utils.ResponseResult;
-import com.dong.web.login.model.LoginBean;
-import com.dong.web.login.service.LoginService;
+import com.dong.web.model.LoginBean;
+import com.dong.web.service.LoginService;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import org.apache.tomcat.util.http.fileupload.IOUtils;

@@ -1,10 +1,10 @@
-package com.dong.web.login.entity;
+package com.dong.web.entity;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -13,8 +13,8 @@ public class Permission {
     private String permissionName;
     private int permissionType;
     private String resourceId;
-    private Timestamp createTime;
-    private Timestamp updateTime;
+    private Date createTime;
+    private Date updateTime;
 
     @Id
     @Basic
@@ -59,21 +59,21 @@ public class Permission {
 
     @Basic
     @Column(name = "create_time", nullable = false)
-    public Timestamp getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Timestamp createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
     @Basic
     @Column(name = "update_time", nullable = true)
-    public Timestamp getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Timestamp updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 

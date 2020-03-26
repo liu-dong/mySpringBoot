@@ -1,10 +1,10 @@
-package com.dong.web.login.service.impl;
+package com.dong.web.service.impl;
 
 import com.dong.utils.ResponseResult;
-import com.dong.web.login.dao.UserJpaDao;
-import com.dong.web.login.entity.User;
-import com.dong.web.login.model.LoginBean;
-import com.dong.web.login.service.LoginService;
+import com.dong.web.dao.UserJpaDao;
+import com.dong.web.entity.User;
+import com.dong.web.model.LoginBean;
+import com.dong.web.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

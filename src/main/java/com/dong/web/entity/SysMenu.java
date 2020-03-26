@@ -1,7 +1,7 @@
-package com.dong.web.login.entity;
+package com.dong.web.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -17,8 +17,8 @@ public class SysMenu {
     private String menuPath;
     private Integer menuStatus;
     private int hasChild;
-    private Timestamp createTime;
-    private Timestamp updateTime;
+    private Date createTime;
+    private Date updateTime;
 
     @Id
     @Basic
@@ -123,21 +123,21 @@ public class SysMenu {
 
     @Basic
     @Column(name = "create_time", nullable = false)
-    public Timestamp getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Timestamp createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
     @Basic
     @Column(name = "update_time", nullable = true)
-    public Timestamp getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Timestamp updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 

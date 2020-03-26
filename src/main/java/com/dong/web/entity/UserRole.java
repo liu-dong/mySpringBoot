@@ -1,4 +1,4 @@
-package com.dong.web.login.entity;
+package com.dong.web.entity;
 
 import javax.persistence.*;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package com.dong.web.login.model;
+package com.dong.web.model;
 
 import lombok.Data;
 
