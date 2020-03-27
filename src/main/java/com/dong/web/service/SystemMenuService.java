@@ -16,6 +16,8 @@ public interface SystemMenuService {
      */
     ResponseResult findSystemMenuList(SystemMenuBean bean, int limit, int page);
 
+    ResponseResult findSystemMenuList(SystemMenuBean bean);
+
     /**
      * 保存菜单信息
      *

@@ -27,9 +27,10 @@ public class SystemMenuController {
     public ResponseResult findSystemMenuList(){
         SystemMenuBean bean = new SystemMenuBean();
         bean.setHasChild(1);
-        int limit = 1;
+        int limit = 2;
         int page = 1;
-        return systemMenuService.findSystemMenuList(bean,limit,page);
+//        return systemMenuService.findSystemMenuList(bean,limit,page);
+        return systemMenuService.findSystemMenuList(bean);
     }
 
     /**

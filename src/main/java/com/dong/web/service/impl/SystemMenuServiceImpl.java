@@ -2,51 +2,48 @@ package com.dong.web.service.impl;
 
 import com.dong.utils.CommonUtils;
 import com.dong.utils.ResponseResult;
+import com.dong.web.dao.CommonDao;
 import com.dong.web.dao.SysMenuJpaDao;
 import com.dong.web.entity.SysMenu;
 import com.dong.web.model.SystemMenuBean;
 import com.dong.web.service.SystemMenuService;
-import org.hibernate.query.internal.NativeQueryImpl;
-import org.hibernate.transform.Transformers;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class SystemMenuServiceImpl implements SystemMenuService {
 
     @Autowired
     private SysMenuJpaDao sysMenuJpaDao;
+
     @Autowired
-    private EntityManager entityManager;
+    private CommonDao commonDao;
+
 
     @Override
     public ResponseResult findSystemMenuList(SystemMenuBean bean, int limit, int page) {
         ResponseResult result = new ResponseResult();
         StringBuilder sql = new StringBuilder();
         List<Object> param = new ArrayList<>();
-        sql.append("select * from sys_menu where 1=1 ");
+        sql.append(" SELECT * FROM sys_menu WHERE 1 = 1 ");
         if (!StringUtils.isEmpty(bean.getHasChild())) {
-            sql.append(" and has_child = ? ");
+            sql.append(" AND has_child = ? ");
             param.add(bean.getHasChild());
         }
-        Query query = entityManager.createNativeQuery(String.valueOf(sql));
-        for (int i = 0; i < param.size(); i++) {
-            query.setParameter(i + 1, param.get(i));
-        }
-        query.setFirstResult(limit - 1);//起始数
-        query.setMaxResults(page);
-        query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-        List<Map<String, Object>> dataList = query.getResultList();
+        List<Map<String, Object>> dataList = commonDao.findListBySql(sql, param, page, limit);
         result.setData(dataList);
+        return result;
+    }
+
+    @Override
+    public ResponseResult findSystemMenuList(SystemMenuBean bean) {
+        ResponseResult result = new ResponseResult();
+        result.setData(getMenuTreeByRecursion(""));
         return result;
     }
 
@@ -80,5 +77,38 @@ public class SystemMenuServiceImpl implements SystemMenuService {
             sysMenuJpaDao.delete(entity);
             return ResponseResult.success(null, "删除成功!");
         }
+    }
+
+    /**
+     * 递归获取菜单树
+     *
+     * @param parentId
+     * @return
+     */
+    private List<Map<String ,Object>> getMenuTreeByRecursion(String parentId){
+        List<Map<String,Object>> menuList = new ArrayList<>();
+        List<SysMenu> sysMenuList;
+        if (StringUtils.isEmpty(parentId)){
+            sysMenuList = sysMenuJpaDao.findAll();
+        }else {
+            sysMenuList = sysMenuJpaDao.getAllByParentId(parentId);
+        }
+        if (!CollectionUtils.isEmpty(sysMenuList)){
+            for (SysMenu sysMenu : sysMenuList) {
+                Map<String,Object> map = new HashMap<>();
+                parentId = sysMenu.getParentId();
+                map.put("id",sysMenu.getId());
+                map.put("title",sysMenu.getMenuName());
+                map.put("url",sysMenu.getMenuUrl());
+                map.put("icon",sysMenu.getMenuIcon());
+                List<Map<String,Object>> childrenList = new ArrayList<>();
+                if (sysMenu.getHasChild() == 1){
+                    childrenList = getMenuTreeByRecursion(parentId);
+                }
+                map.put("children",childrenList);
+                menuList.add(map);
+            }
+        }
+        return menuList;
     }
 }
