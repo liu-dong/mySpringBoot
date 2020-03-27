@@ -10,4 +10,6 @@ import java.util.List;
 public interface SysMenuJpaDao extends JpaRepository<SysMenu, String> {
 
     List<SysMenu> getAllByParentId(String parentId);
+
+    List<SysMenu> getAllByMenuLevel(int menuLevel);
 }

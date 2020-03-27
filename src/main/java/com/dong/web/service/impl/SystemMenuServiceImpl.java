@@ -89,7 +89,7 @@ public class SystemMenuServiceImpl implements SystemMenuService {
         List<Map<String,Object>> menuList = new ArrayList<>();
         List<SysMenu> sysMenuList;
         if (StringUtils.isEmpty(parentId)){
-            sysMenuList = sysMenuJpaDao.findAll();
+            sysMenuList = sysMenuJpaDao.getAllByMenuLevel(1);
         }else {
             sysMenuList = sysMenuJpaDao.getAllByParentId(parentId);
         }
