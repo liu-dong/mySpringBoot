@@ -5,6 +5,8 @@ import com.dong.web.model.LoginBean;
 import com.dong.web.service.LoginService;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,7 @@ import java.io.IOException;
  * @author LD
  * @date 2020/3/22 20:59
  */
+@Api(tags = "登录方法")
 @RestController
 public class LoginController {
 
@@ -60,6 +63,7 @@ public class LoginController {
      * @param request
      * @throws IOException
      */
+    @ApiOperation("获取动态生成验证码")
     @GetMapping("/getKaptcha")
     public void getKaptcha(HttpServletResponse response, HttpServletRequest request) throws IOException {
         response.setHeader("Cache-Control", "no-store, no-cache");

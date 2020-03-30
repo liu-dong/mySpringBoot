@@ -1,8 +1,10 @@
 package com.dong.web.controller;
 
-import org.springframework.stereotype.Controller;
+import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Hello World
@@ -10,18 +12,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @Date 2019/12/9 9:45
  * @Version 1.0
  */
-@Controller
+@Api(tags = "测试")
+@RestController("hello")
 @RequestMapping("/hello")
 public class HelloController {
 
 
-    @RequestMapping(value = "/hello")
+    @GetMapping(value = "/hello")
     public String hello(){
         return "/hello";
     }
 
-    @RequestMapping(value = "hi")
-    @ResponseBody
+    @PostMapping(value = "hi")
     public String hi(){
         return "hi world!";
     }

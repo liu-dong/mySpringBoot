@@ -3,6 +3,7 @@ package com.dong.web.controller;
 import com.dong.utils.ResponseResult;
 import com.dong.web.model.SystemMenuBean;
 import com.dong.web.service.SystemMenuService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author LD
  */
+@Api(tags = "菜单管理模块")
 @RestController
 @RequestMapping("/system/systemMenu")
 public class SystemMenuController {
