@@ -82,33 +82,71 @@ public class SystemMenuServiceImpl implements SystemMenuService {
     /**
      * 递归获取菜单树
      *
-     * @param parentId
+     * @param parentId //子菜单的父菜单主键
      * @return
      */
-    private List<Map<String ,Object>> getMenuTreeByRecursion(String parentId){
-        List<Map<String,Object>> menuList = new ArrayList<>();
+    private List<Map<String, Object>> getMenuTreeByRecursion(String parentId) {
+        List<Map<String, Object>> menuList = new ArrayList<>();
         List<SysMenu> sysMenuList;
-        if (StringUtils.isEmpty(parentId)){
+        if (StringUtils.isEmpty(parentId)) {//如果父菜单主键为空说明找的是一级菜单
             sysMenuList = sysMenuJpaDao.getAllByMenuLevel(1);
-        }else {
+        } else {
             sysMenuList = sysMenuJpaDao.getAllByParentId(parentId);
         }
-        if (!CollectionUtils.isEmpty(sysMenuList)){
+        if (!CollectionUtils.isEmpty(sysMenuList)) {
             for (SysMenu sysMenu : sysMenuList) {
-                Map<String,Object> map = new HashMap<>();
-                parentId = sysMenu.getParentId();
-                map.put("id",sysMenu.getId());
-                map.put("title",sysMenu.getMenuName());
-                map.put("url",sysMenu.getMenuUrl());
-                map.put("icon",sysMenu.getMenuIcon());
-                List<Map<String,Object>> childrenList = new ArrayList<>();
-                if (sysMenu.getHasChild() == 1){
+                Map<String, Object> map = new HashMap<>();
+                parentId = sysMenu.getId();
+                map.put("id", sysMenu.getId());
+                map.put("title", sysMenu.getMenuName());
+                map.put("url", sysMenu.getMenuUrl());
+                map.put("icon", sysMenu.getMenuIcon());
+                List<Map<String, Object>> childrenList = new ArrayList<>();
+                if (sysMenu.getHasChild() == 1) {
                     childrenList = getMenuTreeByRecursion(parentId);
                 }
-                map.put("children",childrenList);
+                map.put("children", childrenList);
                 menuList.add(map);
             }
         }
         return menuList;
+    }
+
+
+    public List<Map<String, Object>> getMenuList(List<SysMenu> sysMenuList) {
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (SysMenu sysMenu : sysMenuList) {
+            Map<String, Object> map = new HashMap<>();
+            if (sysMenu.getMenuLevel() == 1) {
+                map.put("id", sysMenu.getId());
+                map.put("title", sysMenu.getMenuName());
+                map.put("url", sysMenu.getMenuUrl());
+                map.put("icon", sysMenu.getMenuIcon());
+                List<Map<String, Object>> childrenList = new ArrayList<>();
+                if (sysMenu.getHasChild() == 1) {
+                    String parentId = sysMenu.getId();
+                    childrenList = getChildrenMenuByRecursion(sysMenuList,parentId);
+                }
+                map.put("children", childrenList);
+            }
+            result.add(map);
+        }
+        return result;
+    }
+
+    private List<Map<String, Object>> getChildrenMenuByRecursion(List<SysMenu> sysMenuList, String parentId) {
+        List<Map<String, Object>> childrenList = new ArrayList<>();
+        for (SysMenu menu : sysMenuList) {
+            if (parentId.equals(menu.getParentId())) {
+                Map<String, Object> chilrenMenu = new HashMap<>();
+                chilrenMenu.put("id", menu.getId());
+                chilrenMenu.put("title", menu.getMenuName());
+                chilrenMenu.put("url", menu.getMenuUrl());
+                chilrenMenu.put("icon", menu.getMenuIcon());
+                chilrenMenu.put("children", getChildrenMenuByRecursion(sysMenuList,parentId));
+                childrenList.add(chilrenMenu);
+            }
+        }
+        return childrenList;
     }
 }
