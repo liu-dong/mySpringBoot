@@ -76,6 +76,13 @@
             <version>2.9.2</version>
         </dependency>
 
+        <!--使用spring boot+WebSocket 实现定时消息推送（基于注解）-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+
         <!--集成 Spring Session和Redis-->
         <!--<dependency>
             <groupId>org.springframework.boot</groupId>

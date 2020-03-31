@@ -53,7 +53,7 @@ public class SystemMenuController {
      * @param bean
      * @return
      */
-    @RequestMapping("/saveSystemMenuInfo")
+    @PostMapping("/saveSystemMenuInfo")
     public ResponseResult saveSystemMenuInfo(SystemMenuBean bean){
         return systemMenuService.saveSystemMenuInfo(bean);
     }
@@ -64,7 +64,7 @@ public class SystemMenuController {
      * @param id
      * @return
      */
-    @RequestMapping("/getSystemMenuView")
+    @GetMapping("/getSystemMenuView")
     public ResponseResult getSystemMenuView(String id){
         return systemMenuService.getSystemMenuView(id);
     }
@@ -75,7 +75,7 @@ public class SystemMenuController {
      * @param id
      * @return
      */
-    @RequestMapping("/deleteSystemMenuInfo")
+    @PostMapping("/deleteSystemMenuInfo")
     public ResponseResult deleteSystemMenuInfo(String id){
         return systemMenuService.deleteSystemMenuInfo(id);
     }
