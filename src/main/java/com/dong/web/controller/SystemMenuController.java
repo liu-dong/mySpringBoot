@@ -4,7 +4,10 @@ import com.dong.utils.ResponseResult;
 import com.dong.web.model.SystemMenuBean;
 import com.dong.web.service.SystemMenuService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,14 +28,23 @@ public class SystemMenuController {
      * 查询菜单信息列表
      * @return
      */
-    @RequestMapping("/findSystemMenuList")
+    @PostMapping("/findSystemMenuList")
     public ResponseResult findSystemMenuList(){
         SystemMenuBean bean = new SystemMenuBean();
         bean.setHasChild(1);
         int limit = 2;
         int page = 1;
-//        return systemMenuService.findSystemMenuList(bean,limit,page);
-        return systemMenuService.findSystemMenuList(bean);
+        return systemMenuService.findSystemMenuList(bean,limit,page);
+    }
+
+    /**
+     * 获取菜单树
+     * @return
+     */
+    @ApiOperation("获取菜单树")
+    @GetMapping("/getSystemMenuTree")
+    public ResponseResult getSystemMenuTree(int type){
+        return systemMenuService.getSystemMenuTree(type);
     }
 
     /**

@@ -16,7 +16,12 @@ public interface SystemMenuService {
      */
     ResponseResult findSystemMenuList(SystemMenuBean bean, int limit, int page);
 
-    ResponseResult findSystemMenuList(SystemMenuBean bean);
+    /**
+     * 查询菜单树
+     * @param type （查询菜单树类型 1：根据递归获取菜单树(多次访问数据库)、2：根据所有菜单数据生成菜单树（访问一次菜单））
+     * @return
+     */
+    ResponseResult getSystemMenuTree(int type);
 
     /**
      * 保存菜单信息
