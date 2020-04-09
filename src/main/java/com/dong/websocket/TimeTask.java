@@ -2,7 +2,6 @@ package com.dong.websocket;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +10,7 @@ import java.util.Date;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 @Component
-@EnableScheduling
+//@EnableScheduling
 public class TimeTask {
 
     private static Logger logger = LoggerFactory.getLogger(TimeTask.class);
