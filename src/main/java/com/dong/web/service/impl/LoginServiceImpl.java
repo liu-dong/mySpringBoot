@@ -1,6 +1,6 @@
 package com.dong.web.service.impl;
 
-import com.dong.utils.ResponseResult;
+import com.dong.common.ResponseResult;
 import com.dong.web.dao.UserJpaDao;
 import com.dong.web.entity.User;
 import com.dong.web.model.LoginBean;

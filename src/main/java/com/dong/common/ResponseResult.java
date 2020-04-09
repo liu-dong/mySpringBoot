@@ -1,4 +1,4 @@
-package com.dong.utils;
+package com.dong.common;
 
 import lombok.Data;
 

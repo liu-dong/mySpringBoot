@@ -1,6 +1,6 @@
 package com.dong.web.service;
 
-import com.dong.utils.ResponseResult;
+import com.dong.common.ResponseResult;
 import com.dong.web.model.LoginBean;
 
 public interface LoginService {

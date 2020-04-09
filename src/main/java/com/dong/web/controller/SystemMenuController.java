@@ -1,6 +1,6 @@
 package com.dong.web.controller;
 
-import com.dong.utils.ResponseResult;
+import com.dong.common.ResponseResult;
 import com.dong.web.model.SystemMenuBean;
 import com.dong.web.service.SystemMenuService;
 import io.swagger.annotations.Api;

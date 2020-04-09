@@ -1,6 +1,6 @@
 package com.dong.web.controller;
 
-import com.dong.utils.ResponseResult;
+import com.dong.common.ResponseResult;
 import com.dong.web.model.LoginBean;
 import com.dong.web.service.LoginService;
 import com.google.code.kaptcha.Constants;
@@ -9,8 +9,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,11 +46,7 @@ public class LoginController {
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ResponseResult login(@Valid LoginBean bean, BindingResult bindingResult, HttpServletRequest request) {
-        //Validator + BindResult进行规则校验
-        for (ObjectError error : bindingResult.getAllErrors()){
-            return ResponseResult.error(error.getDefaultMessage());
-        }
+    public ResponseResult login(@Valid LoginBean bean, HttpServletRequest request) {
         // 从session中获取之前保存的验证码跟前台传来的验证码进行匹配
         final Object kaptcha = request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         if (kaptcha == null) {

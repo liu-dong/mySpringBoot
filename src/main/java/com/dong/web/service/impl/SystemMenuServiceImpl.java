@@ -1,7 +1,7 @@
 package com.dong.web.service.impl;
 
-import com.dong.utils.CommonUtils;
-import com.dong.utils.ResponseResult;
+import com.dong.common.CommonUtils;
+import com.dong.common.ResponseResult;
 import com.dong.web.dao.CommonDao;
 import com.dong.web.dao.SysMenuJpaDao;
 import com.dong.web.entity.SysMenu;
