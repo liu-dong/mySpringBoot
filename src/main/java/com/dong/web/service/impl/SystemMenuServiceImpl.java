@@ -38,7 +38,15 @@ public class SystemMenuServiceImpl implements SystemMenuService {
         ResponseResult result = new ResponseResult();
         StringBuilder sql = new StringBuilder();
         List<Object> param = new ArrayList<>();
-        sql.append(" SELECT * FROM sys_menu WHERE 1 = 1 ");
+        sql.append(" SELECT id, parent_id parentId, menu_name menuName, menu_level menuLevel, ");
+        sql.append(" menu_icon menuIcon, menu_order menuOrder, menu_url menuUrl, ");
+        sql.append(" menu_path menuPath, menu_status menuStatus, has_child hasChild ");
+        sql.append(" FROM sys_menu ");
+        sql.append(" WHERE 1 = 1 ");
+        if (!StringUtils.isEmpty(bean.getMenuStatus())) {
+            sql.append(" AND menu_status = ? ");
+            param.add(bean.getMenuStatus());
+        }
         if (!StringUtils.isEmpty(bean.getHasChild())) {
             sql.append(" AND has_child = ? ");
             param.add(bean.getHasChild());
