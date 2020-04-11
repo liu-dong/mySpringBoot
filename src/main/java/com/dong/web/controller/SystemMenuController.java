@@ -29,11 +29,7 @@ public class SystemMenuController {
      * @return
      */
     @PostMapping("/findSystemMenuList")
-    public ResponseResult findSystemMenuList(){
-        SystemMenuBean bean = new SystemMenuBean();
-        bean.setHasChild(1);
-        int limit = 2;
-        int page = 1;
+    public ResponseResult findSystemMenuList(SystemMenuBean bean,int limit,int page){
         return systemMenuService.findSystemMenuList(bean,limit,page);
     }
 
