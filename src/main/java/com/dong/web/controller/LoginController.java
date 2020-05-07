@@ -41,7 +41,6 @@ public class LoginController {
     /**
      * 登录
      * @param bean
-     * @param bindingResult
      * @param request
      * @return
      */
