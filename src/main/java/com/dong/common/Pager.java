@@ -10,24 +10,24 @@ import java.util.List;
  * @author LD
  */
 @Data
-public class Page<T> {
+public class Pager<T> {
 
     /**
      * 当前页码
      */
-    private int pageNum;
+    private int page;
     /**
      * 每页数量
      */
-    private int pageSize;
+    private int limit;
     /**
      * 记录总数
      */
-    private long totalSize;
+    private long total;
     /**
      * 页码总数
      */
-    private int totalPages;
+    private int pageTotal;
     /**
      * 分页数据
      */

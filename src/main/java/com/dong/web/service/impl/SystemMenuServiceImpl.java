@@ -53,6 +53,8 @@ public class SystemMenuServiceImpl implements SystemMenuService {
         }
         List<Map<String, Object>> dataList = commonDao.findListBySql(sql, param, page, limit);
         result.setData(dataList);
+        result.setTotal(dataList.size());
+        result.setMessage("查询成功！");
         return result;
     }
 

@@ -13,6 +13,7 @@ public class ResponseResult {
     private boolean success = true;
     private String message;
     private Object data;
+    private int total;
 
     /**
      * 操作成功
