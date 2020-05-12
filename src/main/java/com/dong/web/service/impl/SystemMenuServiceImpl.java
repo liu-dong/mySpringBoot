@@ -77,9 +77,22 @@ public class SystemMenuServiceImpl implements SystemMenuService {
     @Override
     public ResponseResult saveSystemMenuInfo(SystemMenuBean bean) {
         SysMenu entity = new SysMenu();
-        BeanUtils.copyProperties(bean, entity);
-        entity.setId(CommonUtils.getUUID());
-        entity.setCreateTime(new Date());
+        if (StringUtils.isEmpty(bean.getId())){//新增
+            entity.setId(CommonUtils.getUUID());
+            entity.setCreateTime(new Date());
+        }else {
+            entity = sysMenuJpaDao.getOne(bean.getId());
+            entity.setUpdateTime(new Date());
+        }
+        entity.setParentId(bean.getParentId());
+        entity.setMenuName(bean.getMenuName());
+        entity.setMenuLevel(bean.getMenuLevel());
+        entity.setMenuIcon(bean.getMenuIcon());
+        entity.setMenuOrder(bean.getMenuOrder());
+        entity.setMenuUrl(bean.getMenuUrl());
+        entity.setMenuPath(bean.getMenuPath());
+        entity.setMenuStatus(bean.getMenuStatus());
+        entity.setHasChild(bean.getHasChild());
         entity.setUpdateTime(new Date());
         entity = sysMenuJpaDao.save(entity);
         return ResponseResult.success(entity, "保存成功!");
