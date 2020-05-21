@@ -51,10 +51,14 @@ public class SystemMenuServiceImpl implements SystemMenuService {
             sql.append(" AND has_child = ? ");
             param.add(bean.getHasChild());
         }
-        List<Map<String, Object>> dataList = commonDao.findListBySql(sql, param, page, limit);
-        result.setData(dataList);
-        result.setTotal(dataList.size());
-        result.setMessage("查询成功！");
+        int total = commonDao.getTotalBySql(sql, param);
+        if (total > 0) {
+            List<Map<String, Object>> dataList = commonDao.findListBySql(sql, param, page, limit);
+            result.setData(dataList);
+            result.setTotal(dataList.size());
+            result.setMessage("查询成功！");
+        }
+        result.setTotal(total);
         return result;
     }
 

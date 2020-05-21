@@ -25,4 +25,12 @@ public interface CommonDao {
      */
     List<Map<String, Object>> findListBySql(StringBuilder sql, List<Object> param);
 
+    /**
+     * 获取记录总数
+     * @param sql
+     * @param param
+     * @return
+     */
+    Integer getTotalBySql(StringBuilder sql, List<Object> param);
+
 }

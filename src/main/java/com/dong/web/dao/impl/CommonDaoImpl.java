@@ -1,5 +1,6 @@
 package com.dong.web.dao.impl;
 
+import com.dong.common.ResponseResult;
 import com.dong.web.dao.CommonDao;
 import org.hibernate.query.internal.NativeQueryImpl;
 import org.hibernate.transform.Transformers;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -37,5 +40,17 @@ public class CommonDaoImpl implements CommonDao {
         }
         query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         return query.getResultList();
+    }
+
+    @Override
+    public Integer getTotalBySql(StringBuilder sql, List<Object> param) {
+        String sqlString = "SELECT COUNT(1) total FROM ( "+sql+" ) t";
+        Query query = entityManager.createNativeQuery(sqlString);
+        Object singleResult = query.getSingleResult();
+        if (singleResult instanceof BigInteger) {
+            return ((BigInteger) singleResult).intValue();
+        } else {
+            return null;
+        }
     }
 }
