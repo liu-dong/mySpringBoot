@@ -1,14 +1,17 @@
 package com.dong.web.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
+@Table(name = "role", schema = "my_data")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class Role {
+
+
     private String id;
     private String roleName;
     private String remark;
