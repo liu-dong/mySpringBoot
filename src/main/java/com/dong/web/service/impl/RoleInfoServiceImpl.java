@@ -63,8 +63,8 @@ public class RoleInfoServiceImpl implements RoleInfoService {
             entity.setCreateTime(new Date());
         } else {
             entity = roleJpaDao.getOne(bean.getId());
-            entity.setUpdateTime(new Date());
         }
+        entity.setUpdateTime(new Date());
         entity.setRoleName(bean.getRoleName());
         entity.setRemark(bean.getRemark());
         entity = roleJpaDao.save(entity);

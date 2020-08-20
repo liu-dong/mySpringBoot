@@ -11,7 +11,6 @@ import java.util.Objects;
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class Role {
 
-
     private String id;
     private String roleName;
     private String remark;
